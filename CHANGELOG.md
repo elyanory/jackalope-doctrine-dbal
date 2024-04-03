@@ -4,6 +4,12 @@ Changelog
 1.x
 ===
 
+1.12.0
+------
+
+* Added: Factory now accepts an optional parameter `jackalope.case_sensitive_encoding` to set `Client::setCaseSensitiveEncoding`.
+* Bugfix: Factory now actually accepts the optional parameter `jackalope.uuid_generator`
+
 1.11.2
 ------
 

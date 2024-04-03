@@ -37,6 +37,7 @@ class RepositoryFactoryDoctrineDBAL implements RepositoryFactoryInterface
     public const JACKALOPE_DATA_CACHES = 'jackalope.data_caches';
     public const JACKALOPE_CHECK_LOGIN_ON_SERVER = 'jackalope.check_login_on_server';
     public const JACKALOPE_UUID_GENERATOR = 'jackalope.uuid_generator';
+    public const JACKALOPE_CASE_SENSITIVE_ENCODING = 'jackalope.case_sensitive_encoding';
     public const JACKALOPE_LOGGER = 'jackalope.logger';
     public const JACKALOPE_DISABLE_TRANSACTIONS = 'jackalope.disable_transactions';
     public const JACKALOPE_DISABLE_STREAM_WRAPPER = 'jackalope.disable_stream_wrapper';
@@ -59,6 +60,8 @@ class RepositoryFactoryDoctrineDBAL implements RepositoryFactoryInterface
     private static $optional = [
         self::JACKALOPE_FACTORY => 'string or object: Use a custom factory class for Jackalope objects',
         self::JACKALOPE_CHECK_LOGIN_ON_SERVER => 'boolean: if set to empty or false, skip initial check whether repository exists. Enabled by default, disable to gain a few milliseconds off each repository instantiation.',
+        self::JACKALOPE_UUID_GENERATOR => 'Closure: A callable that provides universally unique ids to overwrite the default generator.',
+        self::JACKALOPE_CASE_SENSITIVE_ENCODING => 'string: Define the collation for MySQL. Override if automatic determination fails.',
         self::JACKALOPE_DISABLE_TRANSACTIONS => 'boolean: if set and not empty, transactions are disabled, otherwise transactions are enabled. If transactions are enabled but not actively used, every save operation is wrapped into a transaction.',
         self::JACKALOPE_DISABLE_STREAM_WRAPPER => 'boolean: if set and not empty, stream wrapper is disabled, otherwise the stream wrapper is enabled and streams are only fetched when reading from for the first time. If your code always uses all binary properties it reads, you can disable this for a small performance gain.',
         self::JACKALOPE_DATA_CACHES => 'array: an array of PSR-16 SimpleCache or Doctrine Cache instances. keys can be "meta" and "nodes", should be separate namespaces for best performance.',
@@ -110,6 +113,7 @@ class RepositoryFactoryDoctrineDBAL implements RepositoryFactoryInterface
                 || class_exists(ArrayCache::class)
             )
         ;
+        /** @var CachedClient|Client $transport */
         $transport = $canUseCache
             ? $factory->get(CachedClient::class, [$dbConn, $parameters[self::JACKALOPE_DATA_CACHES]])
             : $factory->get(Client::class, [$dbConn]);
@@ -120,6 +124,10 @@ class RepositoryFactoryDoctrineDBAL implements RepositoryFactoryInterface
 
         if (array_key_exists(self::JACKALOPE_UUID_GENERATOR, $parameters)) {
             $transport->setUuidGenerator($parameters[self::JACKALOPE_UUID_GENERATOR]);
+        }
+
+        if (array_key_exists(self::JACKALOPE_CASE_SENSITIVE_ENCODING, $parameters)) {
+            $transport->setCaseSensitiveEncoding($parameters[self::JACKALOPE_CASE_SENSITIVE_ENCODING]);
         }
 
         if (array_key_exists(self::JACKALOPE_LOGGER, $parameters)) {
