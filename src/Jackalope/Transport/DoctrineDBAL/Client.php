@@ -1696,7 +1696,7 @@ class Client extends BaseTransport implements QueryTransport, WritingInterface, 
             'path_prefix' => $srcAbsPath.'/%',
             'path' => $srcAbsPath,
             'workspace' => $this->workspaceName,
-            ]);
+        ]);
 
         /*
          * TODO: https://github.com/jackalope/jackalope-doctrine-dbal/pull/26/files#L0R1057
