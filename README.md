@@ -46,35 +46,43 @@ $ composer require jackalope/jackalope-doctrine-dbal
 
 ## Create a repository
 
-Set up a new database supported by Doctrine DBAL. You can use your favorite GUI frontend or just do something like this:
+Set up a new database supported by Doctrine DBAL. You can use your favorite GUI
+frontend or use the following commands:
 
 ### MySQL
 
-Note that you need at least version 5.1.5 of MySQL, otherwise you will get ``SQLSTATE[42000]: Syntax error or access violation: 1305 FUNCTION cmf-app.EXTRACTVALUE does not exist``
+Note that you need at least version 5.1.5 of MySQL, otherwise you will get
+``SQLSTATE[42000]: Syntax error or access violation: 1305 FUNCTION cmf-app.EXTRACTVALUE does not exist``
 
 ```sh
-$ mysqladmin -u root -p  create database jackalope
-$ echo "grant all privileges on jackalope.* to 'jackalope'@'localhost' identified by '1234test'; flush privileges;" | mysql -u root -p
+mysqladmin -u root -p  create database jackalope
+echo "grant all privileges on jackalope.* to 'jackalope'@'localhost' identified by '1234test'; flush privileges;" | mysql -u root -p
 ```
 
 Also note that with MySQL/MariaDB, you need to configure the encoding to be used (see "bootstrapping" below).
 
+If you configured the encoding but still run into issues with the encoding, e.g.
+`SQLSTATE[42000]: Syntax error or access violation: 1253 COLLATION 'utf8_bin' is not valid for CHARACTER SET 'utf8mb4'`,
+you can set the `jackalope.case_sensitive_encoding` parameter in the call to
+`RepositoryFactoryDoctrineDBAL::getRepository`. 
+
 ### PostgreSQL
 
 ```sh
-$ psql -c "CREATE ROLE jackalope WITH ENCRYPTED PASSWORD '1234test' NOINHERIT LOGIN;" -U postgres
-$ psql -c "CREATE DATABASE jackalope WITH OWNER = jackalope;" -U postgres
+psql -c "CREATE ROLE jackalope WITH ENCRYPTED PASSWORD '1234test' NOINHERIT LOGIN;" -U postgres
+psql -c "CREATE DATABASE jackalope WITH OWNER = jackalope;" -U postgres
 ```
 
 ### SQLite
    
-Database is created automatically if you specify driver and path ("pdo_sqlite", "jackalope.db"). Database name is not needed.
+Database is created automatically if you specify driver and path ("pdo_sqlite",
+"jackalope.db"). Database name is not needed.
 
 For further details, please see the [Doctrine configuration page](http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html#connection-details).
 
 ### Oracle
 
-Disclaimer: There is no continous integration with Oracle. Jackalope 1.8.0 was
+Disclaimer: There is no continuous integration with Oracle. Jackalope 1.8.0 was
 successfully tested by one of our users against `Oracle 19c Enterprise Edition`.
 If you plan to use Jackalope with an Oracle Database, we recommend that you set
 up the Jackalope test suite to ensure your version of Jackalope and Oracle work
@@ -232,12 +240,12 @@ use Jackalope\Transport\Logging\DebugStack;
 $factory = new RepositoryFactoryDoctrineDBAL();
 $logger = new DebugStack();
 
-$options = [
+$parameters = [
     'jackalope.doctrine_dbal_connection' => $connection,
     'jackalope.logger' => $logger,
 ];
 
-$repository = $factory->getRepository($options);
+$repository = $factory->getRepository($parameters);
 
 //...
 
@@ -255,8 +263,8 @@ debug toolbar.
 ## Custom UUID generator
 
 By default, Jackalope uses the UUIDHelper class from phpcr-utils. If you want
-to use something else, you can provide a closure that returns UUIDs as option
-`jackalope.uuid_generator` to `$factory->getRepository($options)`
+to use something else, you can provide a closure that returns UUIDs as parameter
+`jackalope.uuid_generator` to `$factory->getRepository($parameters)`
 
 
 # Implementation notes
