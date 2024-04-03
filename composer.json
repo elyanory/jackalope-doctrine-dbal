@@ -22,7 +22,7 @@
         "doctrine/dbal": "^3.8.1 || ^4.0",
         "phpcr/phpcr": "~2.1.5",
         "phpcr/phpcr-utils": "^1.8 || ^2.0",
-        "jackalope/jackalope": "^2.0.0-RC1",
+        "jackalope/jackalope": "^2.0.0",
         "psr/simple-cache": "^1.0 || ^2.0 || ^3.0"
     },
     "provide": {
@@ -36,7 +36,7 @@
         "phpcr/phpcr-api-tests": "2.1.25",
         "phpunit/phpunit": "^9.0",
         "symfony/cache": "^5.4 || ^6.2 || ^7.0",
-        "phpstan/phpstan": "1.10.x-dev"
+        "phpstan/phpstan": "^1.10"
     },
     "autoload": {
         "files": [ "src/dbal2_compat.php" ],

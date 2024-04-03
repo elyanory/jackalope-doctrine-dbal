@@ -1,8 +1,8 @@
 Changelog
 =========
 
-2.0.0 (unreleased)
-------------------
+2.0.0
+-----
 
 * Added static typing wherever possible. This should not change anything, but the added strictness.
   might trigger errors where it was more tolerant for incorrect types before.
