@@ -385,10 +385,10 @@ class Client extends BaseTransport implements QueryTransport, WritingInterface, 
         if (isset($params['defaultTableOptions']['collate'])) {
             return $this->caseSensitiveEncoding = $params['defaultTableOptions']['collate'];
         }
-        if (!array_key_exists('charset', $params)) {
+        if (!array_key_exists('charset', $params) || !$params['charset']) {
             throw new \InvalidArgumentException('For MySQL, the Doctrine dbal connection must have either "collate" or "charset" configured. Alternatively, you can set the encoding with '.__CLASS__.'::setCaseSensitiveEncoding().');
         }
-        $charset = $params['charset'] ?? 'utf8';
+        $charset = $params['charset'];
 
         return $this->caseSensitiveEncoding = 'binary' === $charset ? $charset : $charset.'_bin';
     }
