@@ -4,6 +4,12 @@ Changelog
 1.x
 ===
 
+1.13.0
+------
+
+* Fixed cache key sanitize for PSR-16 cache.
+* Fixed not found detection for PSR-16 cache.
+
 1.12.0
 ------
 
