@@ -8,9 +8,9 @@ use Jackalope\Factory;
 use Jackalope\Repository;
 use Jackalope\RepositoryFactoryDoctrineDBAL;
 use Jackalope\Session;
-use Jackalope\Test\Tester\Generic;
-use Jackalope\Test\Tester\Mysql;
-use Jackalope\Test\Tester\Pgsql;
+use Jackalope\Tests\Test\Tester\Generic;
+use Jackalope\Tests\Test\Tester\Mysql;
+use Jackalope\Tests\Test\Tester\Pgsql;
 use Jackalope\Transport\DoctrineDBAL\Client;
 use Jackalope\Transport\Logging\Psr3Logger;
 use PHPCR\RepositoryException;
@@ -141,8 +141,8 @@ class ImplementationLoader extends AbstractLoader
 
     public function getSessionWithLastModified()
     {
-        /** @var $session Session */
         $session = $this->getSession();
+        \assert($session instanceof Session);
         $session->setSessionOption(Session::OPTION_AUTO_LASTMODIFIED, true);
 
         return $session;

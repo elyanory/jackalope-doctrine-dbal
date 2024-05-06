@@ -35,7 +35,6 @@
         "psr/log": "^1 || ^2 || ^3",
         "phpcr/phpcr-api-tests": "2.1.25",
         "phpunit/phpunit": "^9.0",
-        "psr/simple-cache": "^1.0 || ^2.0 || ^3.0",
         "symfony/cache": "^5.4 || ^6.2 || ^7.0",
         "phpstan/phpstan": "^1.10"
     },
@@ -44,8 +43,10 @@
         "psr-0": { "Jackalope\\": "src/" }
     },
     "autoload-dev": {
+        "psr-4": {
+            "Jackalope\\Tests\\": "tests/"
+        },
         "psr-0": {
-            "Jackalope\\Test\\": "tests/",
             "Jackalope\\": "vendor/jackalope/jackalope/tests",
             "PHPCR": "vendor/phpcr/phpcr/tests"
         }

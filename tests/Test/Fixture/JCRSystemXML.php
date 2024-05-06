@@ -1,6 +1,6 @@
 <?php
 
-namespace Jackalope\Test\Fixture;
+namespace Jackalope\Tests\Test\Fixture;
 
 /**
  * Jackalope Document or System Views.

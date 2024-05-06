@@ -1,9 +1,9 @@
 <?php
 
-namespace Jackalope\Transport\DoctrineDBAL;
+namespace Jackalope\Tests\Transport\DoctrineDBAL;
 
 use Doctrine\DBAL\Platforms\SqlitePlatform;
-use Jackalope\Test\FunctionalTestCase;
+use Jackalope\Tests\FunctionalTestCase;
 use PHPCR\PropertyType;
 
 class DeleteCascadeTest extends FunctionalTestCase

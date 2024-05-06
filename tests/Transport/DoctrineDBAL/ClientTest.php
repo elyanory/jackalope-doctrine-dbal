@@ -1,9 +1,11 @@
 <?php
 
-namespace Jackalope\Transport\DoctrineDBAL;
+namespace Jackalope\Tests\Transport\DoctrineDBAL;
 
 use Doctrine\DBAL\Platforms\MySQLPlatform;
-use Jackalope\Test\FunctionalTestCase;
+use Jackalope\Tests\FunctionalTestCase;
+use Jackalope\Transport\DoctrineDBAL\Client;
+use Jackalope\Transport\WritingInterface;
 use PHPCR\PropertyType;
 use PHPCR\Query\QOM\QueryObjectModelConstantsInterface;
 use PHPCR\Query\QueryInterface;
@@ -157,6 +159,7 @@ class ClientTest extends FunctionalTestCase
         $topic3->addNode('page3');
         $this->session->save();
 
+        $this->assertInstanceOf(WritingInterface::class, $this->transport);
         $this->transport->moveNodeImmediately('/topic2/page2', '/topic1/page1/page2');
 
         $this->transport->moveNodeImmediately('/topic3', '/topic1/page1/page2/topic3');
@@ -323,7 +326,7 @@ class ClientTest extends FunctionalTestCase
 
             $values = $xpath->query('sv:value', $propertyElement->item(0));
 
-            /** @var $value \DOMElement */
+            /** @var \DOMElement $value */
             foreach ($values as $index => $value) {
                 $lengthAttribute = $value->attributes->getNamedItem('length');
                 if (null === $lengthAttribute) {

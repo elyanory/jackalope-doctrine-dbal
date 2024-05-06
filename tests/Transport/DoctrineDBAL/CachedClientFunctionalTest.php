@@ -1,15 +1,17 @@
 <?php
 
-namespace Jackalope\Transport\DoctrineDBAL;
+namespace Jackalope\Tests\Transport\DoctrineDBAL;
 
 use Doctrine\DBAL\Connection;
 use Jackalope\Factory;
+use Jackalope\Transport\DoctrineDBAL\CachedClient;
+use Jackalope\Transport\TransportInterface;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Cache\Psr16Cache;
 
 class CachedClientFunctionalTest extends ClientTest
 {
-    protected function getClient(Connection $conn)
+    protected function getClient(Connection $conn): TransportInterface
     {
         $nodeCacheAdapter = new ArrayAdapter();
         $nodeCache = new Psr16Cache($nodeCacheAdapter);

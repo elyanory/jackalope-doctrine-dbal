@@ -1,10 +1,11 @@
 <?php
 
-namespace Jackalope\Transport\DoctrineDBAL;
+namespace Jackalope\Tests\Transport\DoctrineDBAL;
 
 use Doctrine\DBAL\Connection;
 use Jackalope\Factory;
-use Jackalope\Test\FunctionalTestCase;
+use Jackalope\Tests\FunctionalTestCase;
+use Jackalope\Transport\DoctrineDBAL\CachedClient;
 use Jackalope\Transport\TransportInterface;
 use Psr\SimpleCache\CacheInterface;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
@@ -30,7 +31,7 @@ class CachedClientTest extends FunctionalTestCase
         self::assertIsArray($namespaces);
     }
 
-    public function testCacheHit()
+    public function testCacheHit(): void
     {
         $cache = new \stdClass();
         $cache->foo = 'bar';
@@ -39,7 +40,7 @@ class CachedClientTest extends FunctionalTestCase
     }
 
     /**
-     * The default key sanitizer keeps the cache key compatible with PSR16
+     * The default key sanitizer keeps the cache key compatible with PSR16.
      */
     public function testDefaultKeySanitizer(): void
     {

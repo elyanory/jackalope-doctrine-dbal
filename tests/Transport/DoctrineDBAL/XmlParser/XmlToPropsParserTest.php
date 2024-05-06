@@ -1,9 +1,10 @@
 <?php
 
-namespace Jackalope\Transport\DoctrineDBAL\XmlParser;
+namespace Jackalope\Tests\Transport\DoctrineDBAL\XmlParser;
 
 use Jackalope\Factory;
-use Jackalope\Test\TestCase;
+use Jackalope\Tests\TestCase;
+use Jackalope\Transport\DoctrineDBAL\XmlParser\XmlToPropsParser;
 use PHPCR\Util\ValueConverter;
 
 class XmlToPropsParserTest extends TestCase

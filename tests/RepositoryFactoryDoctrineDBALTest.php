@@ -1,8 +1,9 @@
 <?php
 
-namespace Jackalope;
+namespace Jackalope\Tests;
 
 use Doctrine\DBAL\Connection;
+use Jackalope\RepositoryFactoryDoctrineDBAL;
 use PHPCR\ConfigurationException;
 use PHPUnit\Framework\TestCase;
 

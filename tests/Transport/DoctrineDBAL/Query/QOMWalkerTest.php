@@ -1,6 +1,6 @@
 <?php
 
-namespace Jackalope\Transport\DoctrineDBAL\Query;
+namespace Jackalope\Tests\Transport\DoctrineDBAL\Query;
 
 use Doctrine\DBAL\Platforms\PostgreSQL94Platform;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
@@ -10,10 +10,12 @@ use Jackalope\Query\QOM\Length;
 use Jackalope\Query\QOM\PropertyValue;
 use Jackalope\Query\QOM\QueryObjectModel;
 use Jackalope\Query\QOM\QueryObjectModelFactory;
-use Jackalope\Test\TestCase;
+use Jackalope\Tests\TestCase;
+use Jackalope\Transport\DoctrineDBAL\Query\QOMWalker;
 use PHPCR\NodeType\NodeTypeManagerInterface;
 use PHPCR\Query\InvalidQueryException;
 use PHPCR\Query\QOM\QueryObjectModelConstantsInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class QOMWalkerTest extends TestCase
 {
@@ -28,7 +30,7 @@ class QOMWalkerTest extends TestCase
     private $walker;
 
     /**
-     * @var NodeTypeManagerInterface
+     * @var NodeTypeManagerInterface&MockObject
      */
     private $nodeTypeManager;
 

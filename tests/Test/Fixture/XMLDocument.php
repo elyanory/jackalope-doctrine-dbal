@@ -1,6 +1,6 @@
 <?php
 
-namespace Jackalope\Test\Fixture;
+namespace Jackalope\Tests\Test\Fixture;
 
 /**
  * Base for Jackalope Document or System Views and PHPUnit DBUnit Fixture XML classes.
