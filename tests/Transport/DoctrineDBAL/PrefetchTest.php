@@ -1,8 +1,8 @@
 <?php
 
-namespace Jackalope\Transport\DoctrineDBAL;
+namespace Jackalope\Tests\Transport\DoctrineDBAL;
 
-use Jackalope\Test\FunctionalTestCase;
+use Jackalope\Tests\FunctionalTestCase;
 
 class PrefetchTest extends FunctionalTestCase
 {

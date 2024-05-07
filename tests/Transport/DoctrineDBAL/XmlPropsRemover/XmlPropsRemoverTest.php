@@ -1,10 +1,11 @@
 <?php
 
-namespace Jackalope\Transport\DoctrineDBAL\XmlPropsRemover;
+namespace Jackalope\Tests\Transport\DoctrineDBAL\XmlPropsRemover;
 
 use Jackalope\Factory;
-use Jackalope\Test\TestCase;
+use Jackalope\Tests\TestCase;
 use Jackalope\Transport\DoctrineDBAL\XmlParser\XmlToPropsParser;
+use Jackalope\Transport\DoctrineDBAL\XmlPropsRemover\XmlPropsRemover;
 use PHPCR\Util\ValueConverter;
 
 class XmlPropsRemoverTest extends TestCase

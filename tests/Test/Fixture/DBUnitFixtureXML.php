@@ -1,6 +1,6 @@
 <?php
 
-namespace Jackalope\Test\Fixture;
+namespace Jackalope\Tests\Test\Fixture;
 
 use PHPCR\Util\PathHelper;
 use PHPCR\Util\UUIDHelper;

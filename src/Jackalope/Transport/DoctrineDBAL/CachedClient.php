@@ -50,8 +50,12 @@ class CachedClient extends Client
             }
         }
         $this->caches = $caches;
-        $this->keySanitizer = static function (string $cacheKey): string {
-            return str_replace(' ', '_', $cacheKey);
+        $this->keySanitizer = static function ($cacheKey) {
+            return str_replace(
+                ['%', '.'],
+                ['_', '|'],
+                \urlencode($cacheKey)
+            );
         };
     }
 
@@ -219,7 +223,7 @@ class CachedClient extends Client
         $cacheKey = "nodes: $path, ".$this->workspaceName;
         $cacheKey = $this->sanitizeKey($cacheKey);
 
-        if (false !== ($result = $this->caches['nodes']->get($cacheKey))) {
+        if (null !== ($result = $this->caches['nodes']->get($cacheKey))) {
             if ('ItemNotFoundException' === $result) {
                 throw new ItemNotFoundException("Item '$path' not found in workspace '$this->workspaceName'");
             }
@@ -354,7 +358,7 @@ class CachedClient extends Client
         $cacheKey = "nodes by uuid: $uuid, $this->workspaceName";
         $cacheKey = $this->sanitizeKey($cacheKey);
 
-        if (false !== ($result = $this->caches['nodes']->get($cacheKey))) {
+        if (null !== ($result = $this->caches['nodes']->get($cacheKey))) {
             if ('ItemNotFoundException' === $result) {
                 throw new ItemNotFoundException("no item found with uuid $uuid");
             }
@@ -407,7 +411,7 @@ class CachedClient extends Client
         $cacheKey = "nodes references: $path, $name, ".$this->workspaceName;
         $cacheKey = $this->sanitizeKey($cacheKey);
 
-        if (false !== ($result = $this->caches['nodes']->get($cacheKey))) {
+        if (null !== ($result = $this->caches['nodes']->get($cacheKey))) {
             return $result;
         }
 
@@ -449,7 +453,7 @@ class CachedClient extends Client
         $cacheKey = "query: {$query->getStatement()}, {$query->getLimit()}, {$query->getOffset()}, {$query->getLanguage()}, ".$this->workspaceName;
         $cacheKey = $this->sanitizeKey($cacheKey);
 
-        if (false !== ($result = $this->caches['query']->get($cacheKey))) {
+        if (null !== ($result = $this->caches['query']->get($cacheKey))) {
             return $result;
         }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Jackalope\Test\Tester;
+namespace Jackalope\Tests\Test\Tester;
 
 use Doctrine\DBAL\Connection;
 use PHPCR\Test\FixtureLoaderInterface;

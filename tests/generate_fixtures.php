@@ -1,7 +1,7 @@
 <?php
 
-use Jackalope\Test\Fixture\DBUnitFixtureXML;
-use Jackalope\Test\Fixture\JCRSystemXML;
+use Jackalope\Tests\Test\Fixture\DBUnitFixtureXML;
+use Jackalope\Tests\Test\Fixture\JCRSystemXML;
 
 /**
  * Convert Jackalope Document or System Views into PHPUnit DBUnit Fixture XML files.

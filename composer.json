@@ -43,8 +43,10 @@
         "psr-0": { "Jackalope\\": "src/" }
     },
     "autoload-dev": {
+        "psr-4": {
+            "Jackalope\\Tests\\": "tests/"
+        },
         "psr-0": {
-            "Jackalope\\Test\\": "tests/",
             "Jackalope\\": "vendor/jackalope/jackalope/tests",
             "PHPCR": "vendor/phpcr/phpcr/tests"
         }

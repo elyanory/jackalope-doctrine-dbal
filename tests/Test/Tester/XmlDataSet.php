@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Jackalope\Test\Tester;
+namespace Jackalope\Tests\Test\Tester;
 
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\Index;

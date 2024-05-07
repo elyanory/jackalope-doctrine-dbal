@@ -1,10 +1,11 @@
 <?php
 
-namespace Jackalope\Transport\DoctrineDBAL;
+namespace Jackalope\Tests\Transport\DoctrineDBAL;
 
 use Doctrine\DBAL\Connection;
 use Jackalope\Factory;
-use Jackalope\Test\FunctionalTestCase;
+use Jackalope\Tests\FunctionalTestCase;
+use Jackalope\Transport\DoctrineDBAL\CachedClient;
 use Jackalope\Transport\TransportInterface;
 use Psr\SimpleCache\CacheInterface;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
@@ -30,25 +31,28 @@ class CachedClientTest extends FunctionalTestCase
         self::assertIsArray($namespaces);
     }
 
-    public function testCacheHit()
+    public function testCacheHit(): void
     {
         $cache = new \stdClass();
         $cache->foo = 'bar';
-        $this->cache->set('nodes:_/test,_tests', $cache);
+        $this->cache->set('nodes_3A+_2Ftest_2C+tests', $cache);
         $this->assertEquals($cache, $this->transport->getNode('/test'));
     }
 
     /**
-     * The default key sanitizer replaces spaces with underscores.
+     * The default key sanitizer keeps the cache key compatible with PSR16.
      */
     public function testDefaultKeySanitizer(): void
     {
-        /** @var CachedClient $cachedClient */
-        $cachedClient = $this->transport;
-        $cachedClient->getNodeTypes();
+        $client = $this->getClient($this->getConnection());
+        $reflection = new \ReflectionClass($client);
+        $keySanitizerProperty = $reflection->getProperty('keySanitizer');
+        $keySanitizerProperty->setAccessible(true);
+        $defaultKeySanitizer = $keySanitizerProperty->getValue($client);
 
-        $this->assertTrue($this->cache->has('node_types'));
-        $this->assertTrue($this->cache->has('nodetypes:_a:0:{}'));
+        $result = $defaultKeySanitizer(' :{}().@/"\\'); // not allowed PSR16 keys
+
+        $this->assertEquals('+_3A_7B_7D_28_29|_40_2F_22_5C', $result);
     }
 
     public function testCustomKeySanitizer(): void

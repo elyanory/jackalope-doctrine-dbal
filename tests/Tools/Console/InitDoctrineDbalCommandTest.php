@@ -1,6 +1,6 @@
 <?php
 
-namespace Jackalope\Tools\Console;
+namespace Jackalope\Tests\Tools\Console;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
@@ -9,6 +9,7 @@ use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use Doctrine\DBAL\Schema\SchemaConfig;
 use Jackalope\Tools\Console\Command\InitDoctrineDbalCommand;
 use Jackalope\Tools\Console\Helper\DoctrineDbalHelper;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Helper\HelperSet;
@@ -22,7 +23,7 @@ class InitDoctrineDbalCommandTest extends TestCase
     protected $helperSet;
 
     /**
-     * @var Connection
+     * @var Connection&MockObject
      */
     protected $connection;
 
@@ -32,7 +33,7 @@ class InitDoctrineDbalCommandTest extends TestCase
     protected $platform;
 
     /**
-     * @var AbstractSchemaManager
+     * @var AbstractSchemaManager&MockObject
      */
     protected $schemaManager;
 

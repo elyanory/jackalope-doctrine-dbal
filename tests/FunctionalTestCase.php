@@ -1,6 +1,6 @@
 <?php
 
-namespace Jackalope\Test;
+namespace Jackalope\Tests;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
@@ -10,6 +10,7 @@ use Jackalope\Session;
 use Jackalope\Transport\DoctrineDBAL\Client;
 use Jackalope\Transport\DoctrineDBAL\RepositorySchema;
 use Jackalope\Transport\TransportInterface;
+use Jackalope\Transport\WorkspaceManagementInterface;
 use PHPCR\RepositoryException;
 use PHPCR\SimpleCredentials;
 
@@ -29,6 +30,7 @@ class FunctionalTestCase extends TestCase
         $conn = $this->getConnection();
         $this->loadFixtures($conn);
         $this->transport = $this->getClient($conn);
+        $this->assertInstanceOf(WorkspaceManagementInterface::class, $this->transport);
 
         $this->transport->createWorkspace('default');
         $this->repository = new Repository(null, $this->transport);
