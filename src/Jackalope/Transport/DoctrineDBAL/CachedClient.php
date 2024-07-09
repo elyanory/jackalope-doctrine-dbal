@@ -103,6 +103,7 @@ class CachedClient extends Client
         if ($node->isNodeType('mix:referenceable')) {
             $uuid = $node->getIdentifier();
             $cacheKey = "nodes by uuid: $uuid, ".$this->workspaceName;
+            $cacheKey = $this->sanitizeKey($cacheKey);
             $this->caches['nodes']->delete($cacheKey);
         }
     }

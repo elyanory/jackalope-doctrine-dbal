@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.0.2
+-----
+
+* Fixed cache key sanitize for UUID map of referenceable nodes.
+
 2.0.1
 -----
 
